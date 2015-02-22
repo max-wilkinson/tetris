@@ -4,6 +4,11 @@ body {
 
 #gameboard {
 	background-color: black;
+	width: 75%;
+}
+
+canvas {
+	background-color: black;
 }
 
 #sidebar {
