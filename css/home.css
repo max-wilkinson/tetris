@@ -1,0 +1,28 @@
+html, body {
+	background-color: #404040;
+	text-align: center;
+	padding: 0px;
+	margin: 0px;
+}
+
+.my-nav {
+	background-color: gray;
+	border: none;
+	border-radius: 0px;
+	height: 15vh;
+	margin-bottom: 5vh;
+}
+
+h1, h2, h3, h4 {
+	color: white;
+	font-weight: lighter;
+}
+
+header h1 {
+	font-family: Syncopate;
+	font-size: 4em;
+}
+
+#start-btn {
+	margin-top: 2vh;
+}

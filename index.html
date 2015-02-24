@@ -8,16 +8,13 @@
         <!-- CSS -->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
-
     </head>
 
     <body>
-
         <!--Gameboard-->
-        <audio id="clearsound" src="sound/pop.ogg" preload="auto"></audio>
+        <audio id="clearsound" src="resources/sound/pop.ogg" preload="auto"></audio>
         <div class="col-md-9 col-xs-12" id="gameboard">
             <canvas id="canvas" width='700' height='975'></canvas>
-            <!--<canvas style="background-color:white; display:block; width:100%; height: 100%;"></canvas>-->
         </div>
 
         <!--Sidebar-->
@@ -30,7 +27,8 @@
             <div id="next"></div>
             <h2>Score</h2>
             <h2>0</h2>
-            <button id="pause-btn">pause</button>
+            <button class="btn btn-default">pause</button>
+            <a class="btn btn-danger" href="home.html">quit</button>
         </div>
 
         <!-- JS -->
