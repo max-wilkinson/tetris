@@ -110,6 +110,10 @@ function clearLines() {
         }
         if ( rowFilled ) {
             document.getElementById( 'clearsound' ).play();
+            var cur_score_elm = document.getElementById('score_value');
+            var cur_score = parseInt(cur_score_elm.innerHTML);
+            var new_score = cur_score + 1;
+            cur_score_elm.innerHTML = new_score;
             for ( var yy = y; yy > 0; --yy ) {
                 for ( var x = 0; x < COLS; ++x ) {
                     board[ yy ][ x ] = board[ yy - 1 ][ x ];
@@ -179,7 +183,7 @@ function newGame() {
     init();
     newShape();
     lose = false;
-    interval = setInterval( tick, 350 );
+    interval = setInterval( tick, 1000 );
 }
 
 newGame();

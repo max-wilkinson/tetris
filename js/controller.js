@@ -43,27 +43,36 @@ function exec_swipe(gesture)
     console.log(swipeDirection);
 };
 
+
 var controller = Leap.loop({enableGestures: true}, function(frame){
   console.log("got a frame");
+  console.log(frame.currentFrameRate);
 });
+
+
 
 controller.on("gesture", function(gesture){
   //... handle gesture object
   console.log("got a gesture");
-  switch (gesture.type){
-          case "circle":
-              console.log("Circle Gesture");
-              keyPress("rotate");
-              break;
-          case "keyTap":
-              console.log("Key Tap Gesture");
-              break;
-          case "screenTap":
-              console.log("Screen Tap Gesture");
-              break;
-          case "swipe":
-              console.log("Swipe Gesture");
-              exec_swipe(gesture);
-              break;
-        }
+
+
+  if(gesture.type == "circle")
+  {
+      console.log("Circle Gesture");
+      if(gesture.state == "stop")
+      {
+        keyPress("rotate");
+      }
+  }
+  
+  else if(gesture.type == "swipe")
+  {
+      console.log("Swipe Gesture");
+      if(gesture.state == "stop")
+      {
+        exec_swipe(gesture);
+      }
+  }
 });
+
+
