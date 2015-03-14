@@ -5,14 +5,6 @@ html, body {
 	margin: 0px;
 }
 
-.my-nav {
-	background-color: gray;
-	border: none;
-	border-radius: 0px;
-	height: 15vh;
-	margin-bottom: 5vh;
-}
-
 h1, h2, h3, h4 {
 	color: white;
 	font-weight: lighter;
@@ -23,6 +15,34 @@ header h1 {
 	font-size: 4em;
 }
 
-#start-btn {
-	margin-top: 2vh;
+.my-nav {
+	background-color: gray;
+	border: none;
+	border-radius: 0px;
+	height: 12vh;
+	margin-bottom: 5vh;
+}
+
+.text-input {
+	width: 30%;
+	min-width: 150px;
+	margin: 1em auto;
+}
+
+#signup-view, #login-view {
+	background-color: #7959b8;
+	width: 30%;
+	min-width: 400px;
+	margin: 3em auto;
+	padding: 0.5em;
+	box-shadow: 2px 2px 4px #181818;
+	display: none;
+}
+
+#login-view {
+	background-color: #F94A32;
+}
+
+#start-btn, #logout-btn {
+	display: none;
 }
