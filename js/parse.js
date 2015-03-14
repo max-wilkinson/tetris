@@ -16,6 +16,7 @@ $(document).ready(function(){
 function showLogIn(){
 	$('#start-btn').hide();
 	$('#logout-btn').hide();
+	$('#profile-view').hide();
 
 	$('#signup-view').show();
 	$('#login-view').show();	
@@ -27,6 +28,36 @@ function showStart(){
 
 	$('#start-btn').show();
 	$('#logout-btn').show();
+	$('#profile-view').show();
+
+	//Gather info for profile card
+	updateProfile();
+}
+
+function updateProfile(){
+	var user = Parse.User.current();
+
+	//Initialize with cached values
+	var level = Math.floor(user.attributes.totalScore/10);
+	var highScore = user.attributes.highScore;
+
+	//Update UI
+	$('#level').text(level);
+	$('#high-score').text(highScore);
+
+	//Update with Parse values
+	var query = new Parse.Query(Parse.User);
+	query.equalTo("username", user.attributes.username);
+	query.find({
+		success: function(data){
+			level = Math.floor(data[0].attributes.totalScore/10);
+			highScore = data[0].attributes.highScore;
+
+			//Update UI
+			$('#level').text(level);
+			$('#high-score').text(highScore);
+		}
+	})	
 }
 
 
@@ -39,15 +70,13 @@ function logOut(){
 //Sign up a new user
 function signUp(){
 	var username = $('#new-username').val();
-	console.log(username);
-
 	var password = $('#new-password').val();
-	console.log(password);
-
 
 	var user = new Parse.User();
 	user.set('username', username);
 	user.set('password', password);
+	user.set('totalScore', 0);
+	user.set('highScore', 0);
 
 	user.signUp(null, {
 		success: function(data){
@@ -64,11 +93,7 @@ function signUp(){
 //Log in an existing user
 function logIn(){
 	var username = $('#username').val();
-	console.log(username);
-
 	var password = $('#password').val();
-	console.log(password);
-
 
 	Parse.User.logIn(username, password, {
 		success: function(user){

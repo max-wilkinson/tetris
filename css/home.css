@@ -29,7 +29,7 @@ header h1 {
 	margin: 1em auto;
 }
 
-#signup-view, #login-view {
+#signup-view, #login-view, #profile-view {
 	background-color: #7959b8;
 	width: 30%;
 	min-width: 400px;
@@ -41,6 +41,10 @@ header h1 {
 
 #login-view {
 	background-color: #F94A32;
+}
+
+#profile-view {
+	background-color: #168BC5;
 }
 
 #start-btn, #logout-btn {
