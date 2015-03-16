@@ -34,10 +34,6 @@ function showStart(){
 	$('#logout-btn').show();
 	$('#profile-view').show();
 
-	//Set random profile card color
-	var color = colors[Math.floor(Math.random()*colors.length)];
-	$('#profile-view').css('background-color', color); 
-
 	//Gather info for profile card
 	updateProfile();
 }
@@ -46,32 +42,35 @@ function updateProfile(){
 	var user = Parse.User.current();
 
 	//Initialize with cached values
-	var imageUrl = user.attributes.photo;
 	var fullname = user.attributes.name;
 	var level = Math.floor(user.attributes.totalScore/10);
 	var highScore = user.attributes.highScore;
+	var color = user.attributes.color;
+	var src = 'data:image/png;base64,' + user.attributes.identicon;
 
 	//Update UI
-	//$('#photo').css('background-image', 'url("' + imageUrl + '")');
 	$('#fullname').text(fullname);
 	$('#level').text(level);
 	$('#high-score').text(highScore);
+	$('#profile-view').css('background-color', color); 
+	$('#photo').css('background-image', 'url("' + src + '")');	
+
 
 	//Update with Parse values
 	var query = new Parse.Query(Parse.User);
 	query.equalTo("username", user.attributes.username);
 	query.find({
 		success: function(data){
-			imageUrl = data[0].attributes.photo;
 			fullname = data[0].attributes.name;
 			level = Math.floor(data[0].attributes.totalScore/10);
 			highScore = data[0].attributes.highScore;
 
 			//Update UI
-			//$('#photo').css('background-image', 'url("' + imageUrl + '")');
 			$('#fullname').text(fullname);
 			$('#level').text(level);
 			$('#high-score').text(highScore);
+			$('#profile-view').css('background-color', color);
+			$('#photo').css('background-image', 'url("' + src + '")');	
 		}
 	})	
 }
@@ -88,6 +87,12 @@ function signUp(){
 	var fullname = $('#new-fullname').val();
 	var username = $('#new-username').val();
 	var password = $('#new-password').val();
+	var color = colors[Math.floor(Math.random()*colors.length)];
+
+	//Generate unique identicon
+	var hash = CryptoJS.MD5(username);
+	var identicon = new Identicon(hash, 210).toString();
+	//var avatar = new Avatar(username).render();
 
 	var user = new Parse.User();
 	user.set('name', fullname);
@@ -95,6 +100,8 @@ function signUp(){
 	user.set('password', password);
 	user.set('totalScore', 0);
 	user.set('highScore', 0);
+	user.set('color', color);
+	user.set('identicon', identicon);
 
 	user.signUp(null, {
 		success: function(data){
