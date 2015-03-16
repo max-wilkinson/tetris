@@ -25,6 +25,7 @@
         <div id="signup-view">
             <h2>Sign Up</h2>
             <form>
+                <input class="form-control text-input" id="new-fullname" type="text" name="fullname" value="" placeholder="name">                
                 <input class="form-control text-input" id="new-username" type="text" name="username" value="" placeholder="username">
                 <input class="form-control text-input" id="new-password" type="password" name="password" value="" placeholder="password">
             </form>
@@ -41,7 +42,8 @@
         </div>
 
         <div id="profile-view">
-            <h2>Profile</h2>
+            <h2><span id="fullname"></h2>
+            <!--<div id="photo"></div>-->
             <h4>Level: <span id="level"></span></h4>
             <h4>High Score: <span id="high-score"></span></h4>
         </div>
