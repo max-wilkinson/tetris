@@ -46,39 +46,30 @@ function updateProfile(){
 	var level = Math.floor(user.attributes.totalScore/10);
 	var highScore = user.attributes.highScore;
 	var color = user.attributes.color;
-	//var src = 'data:image/png;base64,' + user.attributes.identicon;
-	var src = 'data:image/png;base64,' + user.attributes.name;
 
 	//Update UI
 	$('#fullname').text(fullname);
 	$('#level').text(level);
 	$('#high-score').text(highScore);
 	$('#profile-view').css('background-color', color); 
-
-
-	//Profile pic test -- max
-	//var hash = '2ffe4e77325d9a7152f7086ea7aa5114';
-	//var data = new Identicon(hash, 420).toString();
-	//var picURL =  'data:image/png;base64,'+data;
-	//$('#profile-pic').attr("src", picURL);
 	$('#profile-pic').attr("src", user.attributes.identicon);
-
 
 	//Update with Parse values
 	var query = new Parse.Query(Parse.User);
 	query.equalTo("username", user.attributes.username);
 	query.find({
 		success: function(data){
-			fullname = data[0].attributes.name;
-			level = Math.floor(data[0].attributes.totalScore/10);
-			highScore = data[0].attributes.highScore;
+			var fullname = data[0].attributes.name;
+			var level = Math.floor(data[0].attributes.totalScore/10);
+			var highScore = data[0].attributes.highScore;
+			var src = data[0].attributes.identicon;
 
 			//Update UI
 			$('#fullname').text(fullname);
 			$('#level').text(level);
 			$('#high-score').text(highScore);
 			$('#profile-view').css('background-color', color);
-			$('#photo').css('background-image', 'url("' + src + '")');	
+			$('#profile-pic').attr("src", src);	
 		}
 	})	
 }
@@ -98,11 +89,9 @@ function signUp(){
 	var color = colors[Math.floor(Math.random()*colors.length)];
 
 	//Generate unique identicon
-	//var hash = CryptoJS.MD5(username);
-	var hash = '2ffe4e77325d9a7152f7086ea7aa5114';
+	var hash = CryptoJS.MD5(username).toString();
 	var identicon = new Identicon(hash, 210).toString();
 	var picURL = 'data:image/png;base64,' +  identicon;
-	//var avatar = new Avatar(username).render();
 
 	var user = new Parse.User();
 	user.set('name', fullname);
@@ -111,7 +100,6 @@ function signUp(){
 	user.set('totalScore', 0);
 	user.set('highScore', 0);
 	user.set('color', color);
-	//user.set('identicon', identicon);
 	user.set('identicon', picURL);
 
 	user.signUp(null, {
@@ -122,8 +110,7 @@ function signUp(){
 		error: function(data, error){
 			console.log(error);
 		}
-	});
-	
+	});	
 }
 
 //Log in an existing user
@@ -139,6 +126,5 @@ function logIn(){
 		error: function(user, error){
 			console.log(error);
 		}
-	})
-	
+	})	
 }
