@@ -105,7 +105,7 @@ this.controller.on('connect', function(){
         })
 
       }
-   }, 250);
+   }, 500);
 });
 
 controller.connect();
