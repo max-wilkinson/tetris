@@ -44,35 +44,91 @@ function exec_swipe(gesture)
 };
 
 
-var controller = Leap.loop({enableGestures: true}, function(frame){
-  console.log("got a frame");
-  console.log(frame.currentFrameRate);
+// var controller = Leap.loop({enableGestures: true}, function(frame){
+//   console.log("got a frame");
+//   console.log(frame.currentFrameRate);
+//   var num_fingers = 0;
+//   if(frame.valid && frame.hands.length > 0)
+//   {
+//     var hand = frame.hands[0];
+
+//     var pinch = hand.pinchStrength.toPrecision(2);
+//     console.log("num_fingers is:");
+//     console.log(num_fingers);
+//     if(pinch > 0)
+//     {
+//       console.log("rotate");
+//       keyPress("rotate");
+//     }
+//     else if(num_fingers == 2)
+//     {
+//       console.log("right shift");
+//       keyPress("right");
+//     }
+//     else if(num_fingers == 3)
+//     {
+//       console.log("left shift");
+//       keyPress("left");
+//     }
+
+//   }
+// });
+
+
+
+// controller.on("gesture", function(gesture){
+//   //... handle gesture object
+//   console.log("got a gesture");
+
+
+var controller = new Leap.Controller();
+var frameDisplay = document.getElementById('frameID');
+
+this.controller.on('connect', function(){
+      setInterval(function(){
+      var frame = controller.frame();
+      if(frame.valid && frame.gestures.length > 0)
+      {
+        frame.gestures.forEach(function(gesture){
+        if(gesture.type == "circle")
+        {
+            console.log("Circle Gesture");
+            keyPress("rotate");
+        }
+        
+        else if(gesture.type == "swipe")
+        {
+            console.log("Swipe Gesture");
+            exec_swipe(gesture);
+        }
+
+        })
+
+      }
+   }, 250);
 });
 
+controller.connect();
 
 
-controller.on("gesture", function(gesture){
-  //... handle gesture object
-  console.log("got a gesture");
 
-
-  if(gesture.type == "circle")
-  {
-      console.log("Circle Gesture");
-      if(gesture.state == "stop")
-      {
-        keyPress("rotate");
-      }
-  }
+//   if(gesture.type == "circle")
+//   {
+//       console.log("Circle Gesture");
+//       if(gesture.state == "stop")
+//       {
+//         keyPress("rotate");
+//       }
+//   }
   
-  else if(gesture.type == "swipe")
-  {
-      console.log("Swipe Gesture");
-      if(gesture.state == "stop")
-      {
-        exec_swipe(gesture);
-      }
-  }
-});
+//   else if(gesture.type == "swipe")
+//   {
+//       console.log("Swipe Gesture");
+//       if(gesture.state == "stop")
+//       {
+//         exec_swipe(gesture);
+//       }
+//   }
+// });
 
 
