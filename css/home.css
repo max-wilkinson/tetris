@@ -51,3 +51,7 @@ header h1 {
 #start-btn, #logout-btn {
 	display: none;
 }
+
+#profile-pic {
+	border-radius: 20em;
+}

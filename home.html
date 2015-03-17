@@ -25,6 +25,7 @@
         <div id="signup-view">
             <h2>Sign Up</h2>
             <form>
+                <input class="form-control text-input" id="new-fullname" type="text" name="fullname" value="" placeholder="name">                
                 <input class="form-control text-input" id="new-username" type="text" name="username" value="" placeholder="username">
                 <input class="form-control text-input" id="new-password" type="password" name="password" value="" placeholder="password">
             </form>
@@ -41,7 +42,8 @@
         </div>
 
         <div id="profile-view">
-            <h2>Profile</h2>
+            <h2><span id="fullname"></h2>
+            <img id="profile-pic" src="" width="150" height="150">
             <h4>Level: <span id="level"></span></h4>
             <h4>High Score: <span id="high-score"></span></h4>
         </div>
@@ -50,6 +52,8 @@
         <script src="js/tools/jquery-2.1.3.min.js"></script>
         <script src="https://www.parsecdn.com/js/parse-1.3.5.min.js"></script>
         <script src="js/parse.js"></script>
-
+        <script src='js/tools/identicon.js'></script>
+        <script src='js/tools/pnglib.js'></script>
+        <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
     </body>
 </html>

@@ -132,3 +132,30 @@ controller.connect();
 // });
 
 
+//Touch gestures
+$('canvas').on("swipeleft", swipeHandler);
+$('canvas').on("swiperight", swipeHandler);
+$('canvas').on("tap", swipeHandler);
+$('canvas').on("swipedown", swipeHandler);
+
+function swipeHandler( event ){
+  switch(event.type) {
+    case 'swipeleft':
+      console.log("swiped left");
+      keyPress('left');
+      break;
+    case 'swiperight':
+      console.log("swiped right");
+      keyPress('right');
+      break;
+    case 'tap':
+      console.log("tapped");
+      keyPress("rotate");
+      break;
+    case 'swipedown':
+      console.log("swiped down");
+      break;
+  }
+}
+
+
