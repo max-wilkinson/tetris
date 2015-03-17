@@ -46,14 +46,22 @@ function updateProfile(){
 	var level = Math.floor(user.attributes.totalScore/10);
 	var highScore = user.attributes.highScore;
 	var color = user.attributes.color;
-	var src = 'data:image/png;base64,' + user.attributes.identicon;
+	//var src = 'data:image/png;base64,' + user.attributes.identicon;
+	var src = 'data:image/png;base64,' + user.attributes.name;
 
 	//Update UI
 	$('#fullname').text(fullname);
 	$('#level').text(level);
 	$('#high-score').text(highScore);
 	$('#profile-view').css('background-color', color); 
-	$('#photo').css('background-image', 'url("' + src + '")');	
+
+
+	//Profile pic test -- max
+	//var hash = '2ffe4e77325d9a7152f7086ea7aa5114';
+	//var data = new Identicon(hash, 420).toString();
+	//var picURL =  'data:image/png;base64,'+data;
+	//$('#profile-pic').attr("src", picURL);
+	$('#profile-pic').attr("src", user.attributes.identicon);
 
 
 	//Update with Parse values
@@ -90,8 +98,10 @@ function signUp(){
 	var color = colors[Math.floor(Math.random()*colors.length)];
 
 	//Generate unique identicon
-	var hash = CryptoJS.MD5(username);
+	//var hash = CryptoJS.MD5(username);
+	var hash = '2ffe4e77325d9a7152f7086ea7aa5114';
 	var identicon = new Identicon(hash, 210).toString();
+	var picURL = 'data:image/png;base64,' +  identicon;
 	//var avatar = new Avatar(username).render();
 
 	var user = new Parse.User();
@@ -101,7 +111,8 @@ function signUp(){
 	user.set('totalScore', 0);
 	user.set('highScore', 0);
 	user.set('color', color);
-	user.set('identicon', identicon);
+	//user.set('identicon', identicon);
+	user.set('identicon', picURL);
 
 	user.signUp(null, {
 		success: function(data){
