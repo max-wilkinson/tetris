@@ -159,3 +159,77 @@ function swipeHandler( event ){
 }
 
 
+//Gamepad gestures
+var repGP;
+var hasGP = false;
+
+//Check for a Gamepad
+ $(window).on("gamepadconnected", function() {
+        console.log("connection event");
+        hasGP = true;
+        repGP = window.setInterval(reportOnGamepad,150);
+  });
+
+//Check for Disconnection
+$(window).on("gamepaddisconnected", function() {
+        console.log("disconnection event");
+        window.clearInterval(repGP);
+});
+ 
+//Special Connection Check for Chrome
+ var checkGP = window.setInterval(function() {
+  console.log('checkGP');
+  if(navigator.getGamepads()[0]) {
+        if(!hasGP) $(window).trigger("gamepadconnected");
+        window.clearInterval(checkGP);
+  }
+}, 500);
+
+
+ function reportOnGamepad() {
+        var gp = navigator.getGamepads()[0];
+
+        //D-pad
+        if(gp.buttons[14].pressed){
+              keyPress('left');
+        }
+        else if(gp.buttons[15].pressed){
+              keyPress('right');
+        }
+        else if(gp.buttons[12].pressed){
+              keyPress('rotate');
+        } 
+        else if(gp.buttons[13].pressed){
+              keyPress('down');
+        }
+
+        //Triggers
+        if(gp.buttons[6].pressed){
+              keyPress('rotate');
+        }
+        else if(gp.buttons[7].pressed){
+              keyPress('rotate');
+        }
+
+        //Left Joystick
+        if(gp.axes[0] > 0.75) {
+              keyPress('right');
+        }
+        else if(gp.axes[0] < -0.75) {
+              keyPress('left');
+        }
+        else if(gp.axes[1] > 0.75) {
+              keyPress('down');
+        }
+
+        //Right Joystick
+        if(gp.axes[2] > 0.75) {
+              keyPress('right');
+        }
+        else if(gp.axes[2] < -0.75) {
+              keyPress('left');
+        }
+        else if(gp.axes[3] > 0.75) {
+              keyPress('down');
+        }
+ }
