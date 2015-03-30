@@ -5,7 +5,7 @@ html, body {
 	margin: 0px;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, table {
 	color: white;
 	font-weight: lighter;
 }
@@ -30,7 +30,7 @@ header h1 {
 	margin: 1em auto;
 }
 
-#signup-view, #login-view, #profile-view {
+#signup-view, #login-view, #profile-view, #scores-view {
 	background-color: #7959b8;
 	width: 30%;
 	min-width: 400px;
@@ -46,6 +46,21 @@ header h1 {
 
 #profile-view {
 	background-color: #168BC5;
+}
+
+#scores-view {
+	background-color: #168BC5;
+}
+
+#scores-view table {
+	margin: auto;
+	width: 60%;
+	text-align: left;
+	font-size: 18px;
+}
+
+#scores-view tr {
+	max-width: 50%;
 }
 
 #start-btn, #logout-btn {

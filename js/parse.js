@@ -21,6 +21,7 @@ function showLogIn(){
 	$('#start-btn').hide();
 	$('#logout-btn').hide();
 	$('#profile-view').hide();
+	$('#scores-view').hide();
 
 	$('#signup-view').show();
 	$('#login-view').show();	
@@ -33,6 +34,7 @@ function showStart(){
 	$('#start-btn').show();
 	$('#logout-btn').show();
 	$('#profile-view').show();
+	$('#scores-view').show();
 
 	//Gather info for profile card
 	updateProfile();
@@ -72,8 +74,30 @@ function updateProfile(){
 			$('#profile-pic').attr("src", src);	
 		}
 	})	
+
+	var statsQuery = new Parse.Query(Parse.Object.extend("Stats"));
+	statsQuery.find({
+		success: function(data){
+			//Sort high scores
+			data.sort(highScoreSort);
+
+			//Update UI
+			var table = document.getElementById("high-scores");
+		    for (i = 0; i < data.length; i++) { 
+		    	var row = table.insertRow(i); 
+		    	var name = row.insertCell(0);
+		    	var score = row.insertCell(1);
+		    	name.innerHTML = data[i].attributes.username;
+		    	score.innerHTML = data[i].attributes.score;
+		    }
+		}
+	})	
 }
 
+function highScoreSort(a, b){
+	//Compare "a" and "b" 
+	return (b.attributes.score - a.attributes.score); 
+}
 
 //Log out current user
 function logOut(){
