@@ -186,4 +186,10 @@ function newGame() {
     interval = setInterval( tick, 1000 );
 }
 
+function endGame() {
+    var cur_score_elm = document.getElementById('score_value');
+    var cur_score = parseInt(cur_score_elm.innerHTML);
+    return updateHighScore(cur_score);    
+}
+
 newGame();

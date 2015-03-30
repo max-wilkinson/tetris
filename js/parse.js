@@ -10,10 +10,14 @@ $(document).ready(function(){
 	var user = Parse.User.current();
 	console.log(user);
 
-	if(user){
-		showStart();
-	} else {
-		showLogIn();
+	//Load login page or profile page if on home.html
+	var currentPage = document.location.href;
+	if (currentPage.indexOf("home.html") > -1) {
+		if(user){
+			showStart();
+		} else {
+			showLogIn();
+		}
 	}
 });
 
@@ -82,14 +86,7 @@ function updateProfile(){
 			data.sort(highScoreSort);
 
 			//Update UI
-			var table = document.getElementById("high-scores");
-		    for (i = 0; i < data.length; i++) { 
-		    	var row = table.insertRow(i); 
-		    	var name = row.insertCell(0);
-		    	var score = row.insertCell(1);
-		    	name.innerHTML = data[i].attributes.username;
-		    	score.innerHTML = data[i].attributes.score;
-		    }
+			updateScoreTable(data);
 		}
 	})	
 }
@@ -97,6 +94,17 @@ function updateProfile(){
 function highScoreSort(a, b){
 	//Compare "a" and "b" 
 	return (b.attributes.score - a.attributes.score); 
+}
+
+function updateScoreTable(data){
+	var table = document.getElementById("high-scores");
+    for (i = 0; i < data.length; i++) {
+		var row = table.insertRow(i);
+		var name = row.insertCell(0);
+		var score = row.insertCell(1);
+		name.innerHTML = data[i].attributes.username;
+		score.innerHTML = data[i].attributes.score;
+    }
 }
 
 //Log out current user
@@ -151,4 +159,55 @@ function logIn(){
 			console.log(error);
 		}
 	})	
+}
+
+//Update high scores
+function updateHighScore(score){
+	var user = Parse.User.current();
+	var highScore = user.attributes.highScore;
+
+	//Update user's high score
+	if (score > highScore) {
+		user.set('highScore', score);
+		user.save(null, {
+			success: function(user) {},
+			error: function(user, error) {
+				console.log(error);
+			}
+		});
+	}
+
+	//Update global high scores
+	var statsQuery = new Parse.Query(Parse.Object.extend("Stats"));
+	statsQuery.find({
+		success: function(data){
+			//Sort high scores
+			data.sort(highScoreSort);
+
+			if (score > data[data.length-1].attributes.score) {
+				//Replace lowest high score with new high score
+				var Stats = Parse.Object.extend("Stats");
+				var stat = new Stats();
+				stat.id = data[data.length-1].id;
+
+				stat.set('score', score);
+				stat.set('username', user.attributes.username);
+
+				stat.save(null, {
+					success: function(stat) {
+						//Navigate back to home page
+						window.location.href = 'home.html';
+					},
+					error: function(stat, error) {
+						//Navigate back to home page and log error
+						window.location.href = 'home.html';
+						console.log(error);
+					}
+				});
+			}
+		},
+		error: function(data, error){
+			console.log(error);
+		}
+	})
 }
