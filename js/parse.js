@@ -98,6 +98,13 @@ function highScoreSort(a, b){
 
 function updateScoreTable(data){
 	var table = document.getElementById("high-scores");
+
+	//Clear existing table rows
+	for(i = table.rows.length; i > 0; i--) {
+		table.deleteRow(i-1);
+	}
+
+	//Insert rows with top high score data
     for (i = 0; i < data.length; i++) {
 		var row = table.insertRow(i);
 		var name = row.insertCell(0);
@@ -204,6 +211,8 @@ function updateHighScore(score){
 						console.log(error);
 					}
 				});
+			} else {
+				window.location.href = 'home.html';
 			}
 		},
 		error: function(data, error){
