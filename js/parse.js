@@ -1,7 +1,7 @@
 Parse.initialize("XctRj8yjGvXLptN5MH6BdlBl2eE4bKVSDnYM8yVu", 
 	"GzPkrCSUdURM3HTmtdtMjhKWJtiRvxWyMllWRifx");
 
-var colors = [
+var userColors = [
 	'#F7977A', '#FDC68A', '#82CA9D', '#7EA7D8', '#A187BE', '#F49AC2'
 ]
 
@@ -125,7 +125,7 @@ function signUp(){
 	var fullname = $('#new-fullname').val();
 	var username = $('#new-username').val();
 	var password = $('#new-password').val();
-	var color = colors[Math.floor(Math.random()*colors.length)];
+	var color = userColors[Math.floor(Math.random()*userColors.length)];
 
 	//Generate unique identicon
 	var hash = CryptoJS.MD5(username).toString();
