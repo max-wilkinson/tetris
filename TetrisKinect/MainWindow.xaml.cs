@@ -12,45 +12,32 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
     using Microsoft.Kinect;
     using System.Diagnostics;
 
-    /// <summary>
     /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        /// <summary>
-        /// Width of output drawing
-        /// </summary>
-        private const float RenderWidth = 640.0f;
-
-        /// <summary>
-        /// Height of our output drawing
-        /// </summary>
-        private const float RenderHeight = 480.0f;
-
         private bool isReset = true;
 
-        /// <summary>
+        //Websocket
+        private WebSocket ws = new WebSocket();
+
         /// Active Kinect sensor
-        /// </summary>
         private KinectSensor sensor;
 
-        /// <summary>
         /// Initializes a new instance of the MainWindow class.
-        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
 
 
-        /// <summary>
         /// Execute startup tasks
-        /// </summary>
-        /// <param name="sender">object sending the event</param>
-        /// <param name="e">event arguments</param>
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("hello world");
+
+            //Establish websocket server            
+            ws.InitializeSockets();
+
             // Look through all sensors and start the first connected one.
             // This requires that a Kinect is connected at the time of app startup.
             // To make your app robust against plug/unplug, 
@@ -89,11 +76,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
             }
         }
 
-        /// <summary>
         /// Execute shutdown tasks
-        /// </summary>
-        /// <param name="sender">object sending the event</param>
-        /// <param name="e">event arguments</param>
         private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (null != this.sensor)
@@ -102,11 +85,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
             }
         }
 
-        /// <summary>
         /// Event handler for Kinect sensor's SkeletonFrameReady event
-        /// </summary>
-        /// <param name="sender">object sending the event</param>
-        /// <param name="e">event arguments</param>
         private void SensorSkeletonFrameReady(object sender, SkeletonFrameReadyEventArgs e)
         {
             Skeleton[] skeletons = new Skeleton[0];
@@ -129,6 +108,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
                     && this.isReset)
                 {
                     Debug.WriteLine("rotate");
+                    ws.sendMsg("rotate");
                     this.isReset = false;
                 }
                 
@@ -136,6 +116,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
                 else if (rightHand.Position.Y > head.Position.Y && this.isReset)
                 {
                     Debug.WriteLine("right");
+                    ws.sendMsg("right");
                     this.isReset = false;
                 }
 
@@ -143,6 +124,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
                 else if (leftHand.Position.Y > head.Position.Y && this.isReset)
                 {
                     Debug.WriteLine("left");
+                    ws.sendMsg("left");
                     this.isReset = false;
                 }
 
@@ -152,18 +134,11 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
                     this.isReset = true;
                 }
 
-                //var y = rightHand.Position.Y;
-                //Debug.WriteLine(y);
-
             }
 
         }
 
-        /// <summary>
         /// Handles the checking or unchecking of the seated mode combo box
-        /// </summary>
-        /// <param name="sender">object sending the event</param>
-        /// <param name="e">event arguments</param>
         private void CheckBoxSeatedModeChanged(object sender, RoutedEventArgs e)
         {
             if (null != this.sensor)
