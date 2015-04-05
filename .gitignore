@@ -1,0 +1,6 @@
+TetrisKinect/bin/
+TetrisKinect/bld/
+TetrisKinect/obj/
+*.suo
+*.user
+*.exe
