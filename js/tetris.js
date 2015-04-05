@@ -1,4 +1,4 @@
-var COLS = 15, ROWS = 15;
+var COLS = 10, ROWS = 20;
 var board = [];
 var lose;
 var interval;
@@ -183,7 +183,7 @@ function newGame() {
     init();
     newShape();
     lose = false;
-    interval = setInterval( tick, 1000 );
+    interval = setInterval( tick, 1500 );
 }
 
 function endGame() {
