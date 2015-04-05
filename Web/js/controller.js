@@ -58,7 +58,7 @@ var controller = Leap.loop({enableGestures: true}, function(frame){
         {
           console.log("same gesture");
         }
-        else if(gesture.type == "circle" && gesture.radius > 70)
+        else if(gesture.type == "circle" && gesture.radius > 100)
         {
             console.log("radius is: ");
             console.log(gesture.radius);
