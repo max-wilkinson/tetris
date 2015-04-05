@@ -39,8 +39,9 @@ canvas {
 #next {
 	width: 60%;
 	height: 25%;
-	background-color: gray;
 	margin: auto auto 5vh;
+	background: gray url("") no-repeat center;
+	background-size: cover;
 }
 
 #pause-btn {
