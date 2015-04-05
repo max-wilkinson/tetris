@@ -4,6 +4,7 @@ var lose;
 var interval;
 var current; // current moving shape
 var currentX, currentY; // position of current shape
+var next; // next shape
 var shapes = [
     [ 1, 1, 1, 1 ],
     [ 1, 1, 1, 0,
@@ -23,25 +24,34 @@ var colors = [
     'cyan', 'orange', 'blue', 'yellow', 'red', 'green', 'purple'
 ];
 
-// creates a new 4x4 shape in global variable 'current'
+// creates a new 4x4 shape in global variable 'next'
+// sets global variable 'current' to be the previously held 'next' shape
 // 4x4 so as to cover the size when the shape is rotated
 function newShape() {
     var id = Math.floor( Math.random() * shapes.length );
     var shape = shapes[ id ]; // maintain id for color filling
 
-    current = [];
+    // set current block to previous next block 
+    current = next;
+
+    next = [];
     for ( var y = 0; y < 4; ++y ) {
-        current[ y ] = [];
+        next[ y ] = [];
         for ( var x = 0; x < 4; ++x ) {
             var i = 4 * y + x;
             if ( typeof shape[ i ] != 'undefined' && shape[ i ] ) {
-                current[ y ][ x ] = id + 1;
+                next[ y ][ x ] = id + 1;
             }
             else {
-                current[ y ][ x ] = 0;
+                next[ y ][ x ] = 0;
             }
         }
     }
+
+    // set next block image
+    var url = 'url("img/shapes/' + id + '.png")';
+    $('#next').css('background-image', url);
+
     // position where the shape will evolve
     currentX = 5;
     currentY = 0;
@@ -181,6 +191,7 @@ function valid( offsetX, offsetY, newCurrent ) {
 function newGame() {
     clearInterval(interval);
     init();
+    newShape();
     newShape();
     lose = false;
     interval = setInterval( tick, 1000 );
