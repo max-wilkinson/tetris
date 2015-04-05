@@ -52,13 +52,13 @@ var controller = Leap.loop({enableGestures: true}, function(frame){
     if(frame.valid && frame.gestures.length > 0)
     {
       frame.gestures.forEach(function(gesture){
-        console.log("gesture id is:");
-        console.log(gesture.id)
+        // console.log("gesture id is:");
+        // console.log(gesture.id)
         if(gesture.id == most_rec_gest_id)
         {
           console.log("same gesture");
         }
-        else if(gesture.type == "circle" && gesture.radius > 80)
+        else if(gesture.type == "circle" && gesture.radius > 70)
         {
             console.log("radius is: ");
             console.log(gesture.radius);
@@ -66,9 +66,10 @@ var controller = Leap.loop({enableGestures: true}, function(frame){
             console.log("Circle Gesture");
             keyPress("rotate");
         }
-        
-        else if(gesture.type == "swipe")
+        else if(gesture.type == "swipe" && gesture.duration > 5000)
         {
+            console.log("swipe duration");
+            console.log(gesture.duration);
             most_rec_gest_id = gesture.id;
             console.log("Swipe Gesture");
             exec_swipe(gesture);
@@ -85,7 +86,7 @@ var frameDisplay = document.getElementById('frameID');
 
 
 
-controller.connect();
+// controller.connect();
 
 
 
