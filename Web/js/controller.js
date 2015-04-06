@@ -47,18 +47,32 @@ function exec_swipe(gesture)
 
 
 var controller = Leap.loop({enableGestures: true}, function(frame){
-  // console.log("got a frame");
+  console.log("got a frame");
   var num_fingers = 0;
     if(frame.valid && frame.gestures.length > 0)
     {
-      frame.gestures.forEach(function(gesture){
+      gesture = frame.gestures[0];
+
+      for (var c = 0; c < frame.gestures.length; c++)
+      {
+        var temp_gest = frame.gestures[c];
+        if(temp_gest.id == most_rec_gest_id)
+        {
+          console.log("c equals");
+          console.log(c);
+          gesture = temp_gest;
+          break;
+        }
+      }
+
+      // frame.gestures.forEach(function(gesture){
         // console.log("gesture id is:");
         // console.log(gesture.id)
         if(gesture.id == most_rec_gest_id)
         {
           console.log("same gesture");
         }
-        else if(gesture.type == "circle" && gesture.radius > 100)
+        else if(gesture.type == "circle" && gesture.radius > 90)
         {
             console.log("radius is: ");
             console.log(gesture.radius);
@@ -66,7 +80,7 @@ var controller = Leap.loop({enableGestures: true}, function(frame){
             console.log("Circle Gesture");
             keyPress("rotate");
         }
-        else if(gesture.type == "swipe" && gesture.duration > 5000)
+        else if(gesture.type == "swipe")
         {
             console.log("swipe duration");
             console.log(gesture.duration);
@@ -75,7 +89,7 @@ var controller = Leap.loop({enableGestures: true}, function(frame){
             exec_swipe(gesture);
         }
 
-      })
+      // })
 
     }
    

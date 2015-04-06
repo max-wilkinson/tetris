@@ -1,6 +1,6 @@
 var COLS = 10, ROWS = 20;
 var board = [];
-var lose;
+var lose = false;
 var interval;
 var current; // current moving shape
 var currentX, currentY; // position of current shape
