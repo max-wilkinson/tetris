@@ -69,7 +69,7 @@ function init() {
 
 // keep the element moving down, creating new shapes and clearing lines
 function tick() {
-    if ( valid( 0, 1 ) ) {
+    if ( valid( 0, 1, 0 ) ) {
         ++currentY;
     }
     // if the element settled
@@ -167,7 +167,7 @@ function valid( offsetX, offsetY, newCurrent ) {
     offsetX = currentX + offsetX;
     offsetY = currentY + offsetY;
     newCurrent = newCurrent || current;
-
+    console.log(newCurrent);
 
 
     for ( var y = 0; y < 4; ++y ) {
@@ -175,17 +175,26 @@ function valid( offsetX, offsetY, newCurrent ) {
             if ( newCurrent[ y ][ x ] ) {
                 if ( typeof board[ y + offsetY ] == 'undefined'
                   || typeof board[ y + offsetY ][ x + offsetX ] == 'undefined'
-                  || board[ y + offsetY ][ x + offsetX ]
+                  //|| board[ y + offsetY ][ x + offsetX ]
                   || x + offsetX < 0
                   || y + offsetY >= ROWS
                   || x + offsetX >= COLS ) {
                     if (offsetY == 1){
-                        lose = true; // lose if the current shape at the top row when checked
-                        console.log('you lose');
+                        //lose = true; // lose if the current shape at the top row when checked
+                        //console.log('you lose');
                     }
                     return false;
                 }
             }
+            if(newCurrent[y][x]){
+                if(board[y+offsetY][x+offsetX]){
+                    if(offsetY == 1){
+                        lose = true; 
+                    }  
+                    return false;    
+                }
+            }
+            
         }
     }
     return true;
@@ -197,7 +206,7 @@ function newGame() {
     newShape();
     newShape();
     lose = false;
-    interval = setInterval( tick, 250 );
+    interval = setInterval( tick, 1000 );
 }
 
 function endGame() {
