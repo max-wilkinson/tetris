@@ -209,9 +209,15 @@ function newGame() {
     interval = setInterval( tick, 1000 );
 }
 
+function quitGame(){
+    endGame();
+    window.location.href = 'home.html';
+}
+
 function endGame() {
     var cur_score_elm = document.getElementById('score_value');
     var cur_score = parseInt(cur_score_elm.innerHTML);
+    $('#score_value').text('0');
     return updateHighScore(cur_score);    
 }
 

@@ -203,16 +203,16 @@ function updateHighScore(score){
 				stat.save(null, {
 					success: function(stat) {
 						//Navigate back to home page
-						window.location.href = 'home.html';
+						//window.location.href = 'home.html';
 					},
 					error: function(stat, error) {
 						//Navigate back to home page and log error
-						window.location.href = 'home.html';
+						//window.location.href = 'home.html';
 						console.log(error);
 					}
 				});
 			} else {
-				window.location.href = 'home.html';
+				//window.location.href = 'home.html';
 			}
 		},
 		error: function(data, error){
