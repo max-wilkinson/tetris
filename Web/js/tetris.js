@@ -1,4 +1,4 @@
-var COLS = 10, ROWS = 20;
+var COLS = 10, ROWS = 15;
 var board = [];
 var lose = false;
 var interval;
@@ -179,7 +179,10 @@ function valid( offsetX, offsetY, newCurrent ) {
                   || x + offsetX < 0
                   || y + offsetY >= ROWS
                   || x + offsetX >= COLS ) {
-                    if (offsetY == 1) lose = true; // lose if the current shape at the top row when checked
+                    if (offsetY == 1){
+                        lose = true; // lose if the current shape at the top row when checked
+                        console.log('you lose');
+                    }
                     return false;
                 }
             }
@@ -194,7 +197,7 @@ function newGame() {
     newShape();
     newShape();
     lose = false;
-    interval = setInterval( tick, 1500 );
+    interval = setInterval( tick, 250 );
 }
 
 function endGame() {
