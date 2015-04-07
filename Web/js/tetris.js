@@ -77,6 +77,7 @@ function tick() {
         freeze();
         clearLines();
         if (lose) {
+            endGame();
             newGame();
             return false;
         }
