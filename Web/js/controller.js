@@ -22,6 +22,8 @@ function exec_swipe(gesture)
     {
       if(gesture.direction[0] > 0)
       {
+          // console.log("gesture.direction is:");
+          // console.log(gesture.direction[0]);
           swipeDirection = "right";
           keyPress('right');
       } 
@@ -58,8 +60,8 @@ var controller = Leap.loop({enableGestures: true}, function(frame){
         var temp_gest = frame.gestures[c];
         if(temp_gest.id == most_rec_gest_id)
         {
-          console.log("c equals");
-          console.log(c);
+          // console.log("c equals");
+          // console.log(c);
           gesture = temp_gest;
           break;
         }
@@ -69,21 +71,23 @@ var controller = Leap.loop({enableGestures: true}, function(frame){
         // console.log("gesture id is:");
         // console.log(gesture.id)
         if(gesture.id == most_rec_gest_id)
-        {
+        { 
+
           console.log("same gesture");
+          // console.log(gesture.duration);
         }
         else if(gesture.type == "circle" && gesture.radius > 90)
         {
-            console.log("radius is: ");
-            console.log(gesture.radius);
+            // console.log("radius is: ");
+            // console.log(gesture.radius);
             most_rec_gest_id = gesture.id;
             console.log("Circle Gesture");
             keyPress("rotate");
         }
         else if(gesture.type == "swipe")
         {
-            console.log("swipe duration");
-            console.log(gesture.duration);
+            // console.log("swipe duration");
+            // console.log(gesture.duration);
             most_rec_gest_id = gesture.id;
             console.log("Swipe Gesture");
             exec_swipe(gesture);
