@@ -117,19 +117,19 @@ $('canvas').on("swipedown", swipeHandler);
 function swipeHandler( event ){
   switch(event.type) {
     case 'swipeleft':
-      console.log("swiped left");
+      //console.log("swiped left");
       keyPress('left');
       break;
     case 'swiperight':
-      console.log("swiped right");
+      //console.log("swiped right");
       keyPress('right');
       break;
     case 'tap':
-      console.log("tapped");
+      //console.log("tapped");
       keyPress("rotate");
       break;
     case 'swipedown':
-      console.log("swiped down");
+      //console.log("swiped down");
       break;
   }
 }
@@ -143,7 +143,7 @@ var hasGP = false;
  $(window).on("gamepadconnected", function() {
         console.log("connection event");
         hasGP = true;
-        repGP = window.setInterval(reportOnGamepad,150);
+        repGP = window.setInterval(reportOnGamepad,100);
   });
 
 //Check for Disconnection
@@ -154,7 +154,6 @@ $(window).on("gamepaddisconnected", function() {
  
 //Special Connection Check for Chrome
  var checkGP = window.setInterval(function() {
-  console.log('checkGP');
   if(navigator.getGamepads()[0]) {
         if(!hasGP) $(window).trigger("gamepadconnected");
         window.clearInterval(checkGP);

@@ -168,8 +168,6 @@ function valid( offsetX, offsetY, newCurrent ) {
     offsetX = currentX + offsetX;
     offsetY = currentY + offsetY;
     newCurrent = newCurrent || current;
-    console.log(newCurrent);
-
 
     for ( var y = 0; y < 4; ++y ) {
         for ( var x = 0; x < 4; ++x ) {
