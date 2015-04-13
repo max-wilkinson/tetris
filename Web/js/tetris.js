@@ -49,7 +49,7 @@ function newShape() {
     }
 
     // set next block image
-    var url = 'url("img/shapes/' + id + '.png")';
+    var url = 'url("resources/img/shapes/' + id + '.png")';
     $('#next').css('background-image', url);
 
     // position where the shape will evolve
