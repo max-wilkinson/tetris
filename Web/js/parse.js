@@ -129,6 +129,13 @@ function signUp(){
 	var password = $('#new-password').val();
 	var color = userColors[Math.floor(Math.random()*userColors.length)];
 
+	//Banhammer XSS attacks
+	if(fullname.indexOf('<') != -1 || username.indexOf('<') != -1 ||
+		password.indexOf('<') != -1) {
+		alert("Illegal Character");
+		return;
+	}
+
 	//Generate unique identicon
 	var hash = CryptoJS.MD5(username).toString();
 	var identicon = new Identicon(hash, 210).toString();
