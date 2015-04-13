@@ -205,7 +205,29 @@ function newGame() {
     newShape();
     newShape();
     lose = false;
-    interval = setInterval( tick, 1000 );
+
+    string = document.URL;
+    var speed = 1000;
+
+    if (string.indexOf("leap") > -1) {
+        speed = 1500;
+    }
+    else if (string.indexOf("gamepad") > -1) {
+        speed = 500;
+    }
+    else if (string.indexOf("keyboard") > -1) {
+        speed = 500;
+    }
+    else if (string.indexOf("touch") > -1) {
+        speed = 1000;
+    }
+    else if (string.indexOf("kinect") > -1) {
+        speed = 1000;
+    }
+
+    interval = setInterval( tick, speed );
+
+    //interval = setInterval( tick, 1000 );
 }
 
 function quitGame(){

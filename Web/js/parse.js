@@ -26,6 +26,7 @@ function showLogIn(){
 	$('#logout-btn').hide();
 	$('#profile-view').hide();
 	$('#scores-view').hide();
+	$('#input-method-view').hide();
 
 	$('#signup-view').show();
 	$('#login-view').show();	
@@ -39,6 +40,7 @@ function showStart(){
 	$('#logout-btn').show();
 	$('#profile-view').show();
 	$('#scores-view').show();
+	$('#input-method-view').show();
 
 	//Gather info for profile card
 	updateProfile();
@@ -219,4 +221,15 @@ function updateHighScore(score){
 			console.log(error);
 		}
 	})
+}
+
+
+function reply_click(clicked_id) {
+	var input_input = document.getElementById("input_input");
+	input_input.value = clicked_id;
+}
+
+function startGame() {
+	var input_form = document.getElementById("input_form");
+	input_form.submit();
 }

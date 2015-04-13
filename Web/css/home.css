@@ -15,6 +15,11 @@ header h1 {
 	font-size: 4em;
 }
 
+button.input_btn {
+	background: none;
+	border: none;
+}
+
 .my-nav {
 	background-color: gray;
 	border: none;
@@ -38,6 +43,11 @@ header h1 {
 	padding: 0.5em;
 	box-shadow: 2px 2px 4px #181818;
 	display: none;
+}
+
+#input-method-view .input-method {
+	display: inline-block;
+	margin: 20px;
 }
 
 #login-view {
