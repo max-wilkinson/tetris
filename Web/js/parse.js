@@ -28,11 +28,13 @@ function showLogIn(){
 	$('#scores-view').hide();
 	$('#input-method-view').hide();
 
+	$('#guest-view').show();
 	$('#signup-view').show();
 	$('#login-view').show();	
 }
 
 function showStart(){
+	$('#guest-view').hide();
 	$('#signup-view').hide();
 	$('#login-view').hide();
 
