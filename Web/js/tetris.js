@@ -1,3 +1,6 @@
+Parse.initialize("XctRj8yjGvXLptN5MH6BdlBl2eE4bKVSDnYM8yVu", 
+    "GzPkrCSUdURM3HTmtdtMjhKWJtiRvxWyMllWRifx");
+
 var COLS = 10, ROWS = 15;
 var board = [];
 var lose = false;
@@ -202,6 +205,7 @@ function valid( offsetX, offsetY, newCurrent ) {
 function newGame() {
     clearInterval(interval);
     init();
+    showUser();
     newShape();
     newShape();
     lose = false;
@@ -209,6 +213,14 @@ function newGame() {
     string = document.URL;
     var speed = getSpeed( string );
     interval = setInterval( tick, speed );
+}
+
+function showUser(){
+    var user = Parse.User.current();
+    if (!user) {
+        $('#guest-mode').css('display', 'block'); 
+        $('#footer').css('display', 'block'); 
+    }
 }
 
 function getSpeed( string ){

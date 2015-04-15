@@ -44,6 +44,18 @@ canvas {
 	background-size: cover;
 }
 
+#guest-mode, #footer {
+	display: none;
+}
+
+#guest-mode {
+	margin: 20px 0;
+}
+
 #pause-btn {
 	margin-top: 5vh;
+}
+
+#footer {
+	margin-top: 100px;
 }

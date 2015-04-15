@@ -182,54 +182,58 @@ function logIn(){
 //Update high scores
 function updateHighScore(score){
 	var user = Parse.User.current();
-	var highScore = user.attributes.highScore;
+	if (user) {
+		var highScore = user.attributes.highScore;
 
-	//Update user's high score
-	if (score > highScore) {
-		user.set('highScore', score);
-		user.save(null, {
-			success: function(user) {},
-			error: function(user, error) {
+		//Update user's high score
+		if (score > highScore) {
+			user.set('highScore', score);
+			user.save(null, {
+				success: function(user) {},
+				error: function(user, error) {
+					console.log(error);
+				}
+			});
+		}
+
+		//Update global high scores
+		var statsQuery = new Parse.Query(Parse.Object.extend("Stats"));
+		statsQuery.find({
+			success: function(data){
+				//Sort high scores
+				data.sort(highScoreSort);
+
+				if (score > data[data.length-1].attributes.score) {
+					//Replace lowest high score with new high score
+					var Stats = Parse.Object.extend("Stats");
+					var stat = new Stats();
+					stat.id = data[data.length-1].id;
+
+					stat.set('score', score);
+					stat.set('username', user.attributes.username);
+
+					stat.save(null, {
+						success: function(stat) {
+							//Navigate back to home page
+							window.location.href = 'home.html';
+						},
+						error: function(stat, error) {
+							//Navigate back to home page and log error
+							console.log(error);
+						}
+					});
+				} else {
+					window.location.href = 'home.html';
+				}
+			},
+			error: function(data, error){
 				console.log(error);
 			}
-		});
+		})
+	} else {
+		window.location.href = 'home.html';		
+		console.log("guest mode, no high score recorded");///
 	}
-
-	//Update global high scores
-	var statsQuery = new Parse.Query(Parse.Object.extend("Stats"));
-	statsQuery.find({
-		success: function(data){
-			//Sort high scores
-			data.sort(highScoreSort);
-
-			if (score > data[data.length-1].attributes.score) {
-				//Replace lowest high score with new high score
-				var Stats = Parse.Object.extend("Stats");
-				var stat = new Stats();
-				stat.id = data[data.length-1].id;
-
-				stat.set('score', score);
-				stat.set('username', user.attributes.username);
-
-				stat.save(null, {
-					success: function(stat) {
-						//Navigate back to home page
-						window.location.href = 'home.html';
-					},
-					error: function(stat, error) {
-						//Navigate back to home page and log error
-						window.location.href = 'home.html';
-						console.log(error);
-					}
-				});
-			} else {
-				window.location.href = 'home.html';
-			}
-		},
-		error: function(data, error){
-			console.log(error);
-		}
-	})
 }
 
 
