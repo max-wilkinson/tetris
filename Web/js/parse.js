@@ -158,6 +158,7 @@ function signUp(){
 			showStart();
 		},
 		error: function(data, error){
+			alert('Account already exists');
 			console.log(error);
 		}
 	});	
@@ -174,6 +175,7 @@ function logIn(){
 			showStart();
 		},
 		error: function(user, error){
+			alert('Incorrect username or password');
 			console.log(error);
 		}
 	})	
