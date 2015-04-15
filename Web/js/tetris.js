@@ -208,7 +208,6 @@ function newGame() {
 
     string = document.URL;
     var speed = getSpeed( string );
-
     interval = setInterval( tick, speed );
 }
 
@@ -229,7 +228,6 @@ function getSpeed( string ){
 
 function quitGame(){
     endGame();
-    window.location.href = 'home.html';
 }
 
 function endGame() {
