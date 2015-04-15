@@ -26,12 +26,15 @@ function showLogIn(){
 	$('#logout-btn').hide();
 	$('#profile-view').hide();
 	$('#scores-view').hide();
+	$('#input-method-view').hide();
 
+	$('#guest-view').show();
 	$('#signup-view').show();
 	$('#login-view').show();	
 }
 
 function showStart(){
+	$('#guest-view').hide();
 	$('#signup-view').hide();
 	$('#login-view').hide();
 
@@ -39,6 +42,7 @@ function showStart(){
 	$('#logout-btn').show();
 	$('#profile-view').show();
 	$('#scores-view').show();
+	$('#input-method-view').show();
 
 	//Gather info for profile card
 	updateProfile();
@@ -127,6 +131,13 @@ function signUp(){
 	var password = $('#new-password').val();
 	var color = userColors[Math.floor(Math.random()*userColors.length)];
 
+	//Banhammer XSS attacks
+	if(fullname.indexOf('<') != -1 || username.indexOf('<') != -1 ||
+		password.indexOf('<') != -1) {
+		alert("Illegal Character");
+		return;
+	}
+
 	//Generate unique identicon
 	var hash = CryptoJS.MD5(username).toString();
 	var identicon = new Identicon(hash, 210).toString();
@@ -171,52 +182,67 @@ function logIn(){
 //Update high scores
 function updateHighScore(score){
 	var user = Parse.User.current();
-	var highScore = user.attributes.highScore;
+	if (user) {
+		var highScore = user.attributes.highScore;
 
-	//Update user's high score
-	if (score > highScore) {
-		user.set('highScore', score);
-		user.save(null, {
-			success: function(user) {},
-			error: function(user, error) {
+		//Update user's high score
+		if (score > highScore) {
+			user.set('highScore', score);
+			user.save(null, {
+				success: function(user) {},
+				error: function(user, error) {
+					console.log(error);
+				}
+			});
+		}
+
+		//Update global high scores
+		var statsQuery = new Parse.Query(Parse.Object.extend("Stats"));
+		statsQuery.find({
+			success: function(data){
+				//Sort high scores
+				data.sort(highScoreSort);
+
+				if (score > data[data.length-1].attributes.score) {
+					//Replace lowest high score with new high score
+					var Stats = Parse.Object.extend("Stats");
+					var stat = new Stats();
+					stat.id = data[data.length-1].id;
+
+					stat.set('score', score);
+					stat.set('username', user.attributes.username);
+
+					stat.save(null, {
+						success: function(stat) {
+							//Navigate back to home page
+							window.location.href = 'home.html';
+						},
+						error: function(stat, error) {
+							//Navigate back to home page and log error
+							console.log(error);
+						}
+					});
+				} else {
+					window.location.href = 'home.html';
+				}
+			},
+			error: function(data, error){
 				console.log(error);
 			}
-		});
+		})
+	} else {
+		window.location.href = 'home.html';		
+		console.log("guest mode, no high score recorded");///
 	}
+}
 
-	//Update global high scores
-	var statsQuery = new Parse.Query(Parse.Object.extend("Stats"));
-	statsQuery.find({
-		success: function(data){
-			//Sort high scores
-			data.sort(highScoreSort);
 
-			if (score > data[data.length-1].attributes.score) {
-				//Replace lowest high score with new high score
-				var Stats = Parse.Object.extend("Stats");
-				var stat = new Stats();
-				stat.id = data[data.length-1].id;
+function reply_click(clicked_id) {
+	var input_input = document.getElementById("input_input");
+	input_input.value = clicked_id;
+}
 
-				stat.set('score', score);
-				stat.set('username', user.attributes.username);
-
-				stat.save(null, {
-					success: function(stat) {
-						//Navigate back to home page
-						//window.location.href = 'home.html';
-					},
-					error: function(stat, error) {
-						//Navigate back to home page and log error
-						//window.location.href = 'home.html';
-						console.log(error);
-					}
-				});
-			} else {
-				//window.location.href = 'home.html';
-			}
-		},
-		error: function(data, error){
-			console.log(error);
-		}
-	})
+function startGame() {
+	var input_form = document.getElementById("input_form");
+	input_form.submit();
 }

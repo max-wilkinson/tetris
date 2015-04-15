@@ -15,6 +15,11 @@ header h1 {
 	font-size: 4em;
 }
 
+button.input_btn {
+	background: none;
+	border: none;
+}
+
 .my-nav {
 	background-color: gray;
 	border: none;
@@ -30,7 +35,7 @@ header h1 {
 	margin: 1em auto;
 }
 
-#signup-view, #login-view, #profile-view, #scores-view {
+#guest-view, #signup-view, #login-view, #profile-view, #scores-view {
 	background-color: #7959b8;
 	width: 30%;
 	min-width: 400px;
@@ -38,6 +43,15 @@ header h1 {
 	padding: 0.5em;
 	box-shadow: 2px 2px 4px #181818;
 	display: none;
+}
+
+#input-method-view .input-method {
+	display: inline-block;
+	margin: 20px;
+}
+
+#guest-view {
+	background-color: #82CA9D;
 }
 
 #login-view {
