@@ -53,12 +53,14 @@ function updateProfile(){
 
 	//Initialize with cached values
 	var fullname = user.attributes.name;
+	var username = user.attributes.username;
 	var level = Math.floor(user.attributes.totalScore/10);
 	var highScore = user.attributes.highScore;
 	var color = user.attributes.color;
 
 	//Update UI
 	$('#fullname').text(fullname);
+	$('#user_name').text('"'+username+'"');
 	$('#level').text(level);
 	$('#high-score').text(highScore);
 	$('#profile-view').css('background-color', color); 
@@ -186,6 +188,17 @@ function updateHighScore(score){
 	var user = Parse.User.current();
 	if (user) {
 		var highScore = user.attributes.highScore;
+		var totalScore = user.attributes.totalScore;
+		totalScore += score;
+
+		//Update user's total score
+		user.set('totalScore', totalScore);
+		user.save(null, {
+			success: function(user) {},
+			error: function(user, error) {
+				console.log(error);
+			}
+		});
 
 		//Update user's high score
 		if (score > highScore) {
@@ -216,25 +229,21 @@ function updateHighScore(score){
 
 					stat.save(null, {
 						success: function(stat) {
-							//Navigate back to home page
-							window.location.href = 'home.html';
 						},
 						error: function(stat, error) {
-							//Navigate back to home page and log error
 							console.log(error);
 						}
 					});
 				} else {
-					window.location.href = 'home.html';
+					//window.location.href = 'home.html';
 				}
 			},
 			error: function(data, error){
 				console.log(error);
 			}
 		})
-	} else {
-		window.location.href = 'home.html';		
-		console.log("guest mode, no high score recorded");///
+	} else {		
+		console.log("guest mode, no high score recorded");
 	}
 }
 

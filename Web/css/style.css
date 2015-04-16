@@ -59,3 +59,14 @@ canvas {
 #footer {
 	margin-top: 100px;
 }
+
+#popup {
+	display: none;
+	height: 50%;
+	width: 50%;
+	position: absolute;
+	left: 12%;
+	top: 10vh;
+	background-color: LightGray;
+	text-align: center;
+}

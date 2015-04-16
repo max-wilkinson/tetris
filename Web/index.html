@@ -17,6 +17,13 @@
             <canvas id="canvas" width='700' height='975'></canvas>
         </div>
 
+        <div id="popup">
+            <h1>Game Over</h1>
+            <h3>Lines Cleared: <span id="lines"></span></h3>
+            <button class="btn btn-success" onclick="restartGame();">Restart</button>
+            <button class="btn btn-danger" onclick="quitGame();">Quit</button>
+        </div>
+
         <!--Sidebar-->
         <div class="hidden-xs col-sm-3" id="sidebar">
             <div id="header">
@@ -29,7 +36,7 @@
             <h2 id = "score_value">0</h2>
             <h4 id="guest-mode">GUEST MODE</h4>
             <!--<button class="btn btn-default">pause</button>-->
-            <a class="btn btn-danger" onclick="quitGame();">quit</a>
+            <a class="btn btn-default" onclick="$('#popup').toggle();">Menu</a>
 
             <div id="footer">
                 <p>High score will not be<br> recorded in Guest Mode.</p>

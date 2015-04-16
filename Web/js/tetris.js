@@ -80,8 +80,9 @@ function tick() {
         freeze();
         clearLines();
         if (lose) {
-            endGame();
-            newGame();
+            $('#popup').show();
+            //endGame();
+            //newGame();
             return false;
         }
         newShape();
@@ -210,6 +211,11 @@ function newGame() {
     newShape();
     lose = false;
 
+    //Hide popup and reset score
+    $('#popup').hide();
+    $('#score_value').text('0');
+
+    //Set Interval Speed
     string = document.URL;
     var speed = getSpeed( string );
     interval = setInterval( tick, speed );
@@ -240,13 +246,21 @@ function getSpeed( string ){
 
 function quitGame(){
     endGame();
+    window.location.href = 'home.html';
+}
+
+function restartGame(){
+    endGame();
+    newGame();
 }
 
 function endGame() {
     var cur_score_elm = document.getElementById('score_value');
     var cur_score = parseInt(cur_score_elm.innerHTML);
-    $('#score_value').text('0');
-    return updateHighScore(cur_score);    
+    $('#lines').text(cur_score);
+
+    updateHighScore(cur_score);
+    //return updateHighScore(cur_score);    
 }
 
 newGame();
