@@ -89,6 +89,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         private void SensorSkeletonFrameReady(object sender, SkeletonFrameReadyEventArgs e)
         {
             Skeleton[] skeletons = new Skeleton[0];
+            bool isPerson = false;
 
             using (SkeletonFrame skeletonFrame = e.OpenSkeletonFrame())
             {
@@ -98,10 +99,42 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
                     skeletonFrame.CopySkeletonDataTo(skeletons);
                 }
 
-                //Begin Joint Tracking
-                Joint rightHand = skeletons[0].Joints[JointType.HandRight];
-                Joint leftHand = skeletons[0].Joints[JointType.HandLeft];
-                Joint head = skeletons[0].Joints[JointType.Head];
+                //temp
+                //Debug.WriteLine(skeletons.Length);
+
+                if (skeletons.Length > 0)
+                {  
+                    foreach (Skeleton skel in skeletons)
+                    {
+                        if (skel.TrackingState == SkeletonTrackingState.Tracked)
+                        {
+                            isPerson = true;
+                        }
+                    }
+                }
+
+                if (isPerson)
+                {
+                    SkelStatusText.Text = "Detected";
+                    jointTracker(skeletons);
+                }
+                else
+                {
+                    SkelStatusText.Text = "Not Detected";
+                }
+
+            }
+
+        }
+
+        private void jointTracker(Skeleton[] skeletons)
+        {
+            //Begin Joint Tracking
+            for (var i = 0; i < skeletons.Length; ++i)
+            {
+                Joint rightHand = skeletons[i].Joints[JointType.HandRight];
+                Joint leftHand = skeletons[i].Joints[JointType.HandLeft];
+                Joint head = skeletons[i].Joints[JointType.Head];
 
                 //Rotate
                 if (rightHand.Position.Y > head.Position.Y && leftHand.Position.Y > head.Position.Y
@@ -111,7 +144,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
                     ws.sendMsg("rotate");
                     this.isReset = false;
                 }
-                
+
                 //Right
                 else if (rightHand.Position.Y > head.Position.Y && this.isReset)
                 {
@@ -128,14 +161,13 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
                     this.isReset = false;
                 }
 
-                if (rightHand.Position.Y < head.Position.Y && leftHand.Position.Y < head.Position.Y 
+                if (rightHand.Position.Y < head.Position.Y && leftHand.Position.Y < head.Position.Y
                     && !this.isReset)
                 {
                     this.isReset = true;
                 }
-
             }
-
+            
         }
 
         /// Handles the checking or unchecking of the seated mode combo box
