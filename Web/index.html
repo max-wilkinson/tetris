@@ -8,6 +8,7 @@
         <!-- CSS -->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
+        <link href='https://fonts.googleapis.com/css?family=Syncopate' rel='stylesheet' type='text/css'>
     </head>
 
     <body>
@@ -27,7 +28,7 @@
         <!--Sidebar-->
         <div class="hidden-xs col-sm-3" id="sidebar">
             <div id="header">
-                <h2>Tetris</h2>
+                <h2>TetrisX</h2>
             </div>
 
             <h2>Next</h2>
@@ -36,7 +37,7 @@
             <h2 id = "score_value">0</h2>
             <h4 id="guest-mode">GUEST MODE</h4>
             <!--<button class="btn btn-default">pause</button>-->
-            <a class="btn btn-default" onclick="$('#popup').toggle();">Menu</a>
+            <button class="btn btn-default" id="menu-btn" onclick="$('#popup').toggle();">Menu</button>
 
             <div id="footer">
                 <p>High score will not be<br> recorded in Guest Mode.</p>

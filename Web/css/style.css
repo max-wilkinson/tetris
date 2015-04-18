@@ -34,6 +34,7 @@ canvas {
 #header h2 {
 	line-height: 3em;
 	color: white;
+	font-family: 'Syncopate';
 }
 
 #next {
@@ -52,7 +53,7 @@ canvas {
 	margin: 20px 0;
 }
 
-#pause-btn {
+#menu-btn {
 	margin-top: 5vh;
 }
 
