@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <title>Tetris</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/home.css">
+        <link href='https://fonts.googleapis.com/css?family=Syncopate' rel='stylesheet' type='text/css'>
+
+    </head>
+
+    <body>
+        <header class="navbar navbar-default my-nav">
+            <h1>Tetris X</h1>
+        </header>
+
+        <h3>Welcome to most adaptable version of Tetris yet.</h3>
+        <!--<a id="start-btn" class="btn btn-success btn-lg" href="index.html">Start</a>-->
+        <button id="start-btn" class="btn btn-success btn-lg" onClick="startGame();">Start</button>
+        <button id="logout-btn" class="btn btn-lg btn-danger" onclick="logOut();">Log Out</button>
+
+        <div id="input-method-view">
+            <h1>Select Input Method</h1>
+            <div class="input-method">
+                <h2>Touch Gestures</h2>
+                <button class="input_btn" id="touch" onClick="reply_click(this.id)">
+                <input type="image" value="touch" src="resources/img/touch.svg" width="150" height="150">
+                </button>
+            </div>
+            <div class="input-method">
+                <h2>Leap Motion</h2>
+                <button class="input_btn" id="leap" onClick="reply_click(this.id)">
+                <input type="image" value="leap" src="resources/img/leap.svg" width="150" height="150">
+                </button>
+            </div>
+            <div class="input-method">
+                <h2>Gamepad</h2>
+                <button class="input_btn" id="gamepad" onClick="reply_click(this.id)">
+                <input type="image" value="gamepad" src="resources/img/gamepad.svg" width="150" height="150">
+                </button>
+            </div>
+            <div class="input-method">
+                <h2>Kinect</h2>
+                <button class="input_btn" id="kinect" onClick="reply_click(this.id)">
+                <input type="image" value="kinect" src="resources/img/kinect.svg" width="150" height="150">
+                </button>
+            </div>
+            <div class="input-method">
+                <h2>Keyboard</h2>
+                <button class="input_btn" id="keyboard" onClick="reply_click(this.id)">
+                <input type="image" value="keyboard" src="resources/img/keyboard.svg" width="150" height="150">
+                </button>
+            </div>
+            <form id="input_form" action="index.html">
+            <input id="input_input" type="hidden" value="keyboard" name="input-method">
+            </form>
+        </div>    
+
+        <div id="guest-view">
+            <h2>Play As Guest</h2>
+            <button class="btn btn-default" onclick="startGame();">Go!</button>
+        </div>
+
+        <div id="signup-view">
+            <h2>Sign Up</h2>
+            <form>
+                <input class="form-control text-input" id="new-fullname" type="text" name="fullname" value="" placeholder="name">                
+                <input class="form-control text-input" id="new-username" type="text" name="username" value="" placeholder="username">
+                <input class="form-control text-input" id="new-password" type="password" name="password" value="" placeholder="password">
+            </form>
+            <button class="btn btn-default" onclick="signUp()">Go!</button>
+        </div>
+
+         <div id="login-view">
+            <h2>Log In</h2>
+            <form>
+                <input class="form-control text-input" id="username" type="text" name="username" value="" placeholder="username">
+                <input class="form-control text-input" id="password" type="password" name="password" value="" placeholder="password">
+            </form>
+            <button class="btn btn-default" onclick="logIn()">Go!</button>
+        </div>
+
+        <div id="profile-view">
+            <h2><span id="fullname"></span></h2>
+            <h4><span id="user_name"></span></h4>
+            <img id="profile-pic" src="" width="150" height="150">
+            <h4>Level: <span id="level"></span></h4>
+            <h4>High Score: <span id="high-score"></span></h4>
+        </div>
+
+        <div id="scores-view">
+            <h2>Top 5 Players</h2>
+            <table id="high-scores"></table>
+        </div>
+
+        <!--JS-->
+        <script src="js/tools/jquery-2.1.3.min.js"></script>
+        <script src="https://www.parsecdn.com/js/parse-1.3.5.min.js"></script>
+        <script src="js/parse.js"></script>
+        <script src='js/tools/identicon.js'></script>
+        <script src='js/tools/pnglib.js'></script>
+        <script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+    </body>
+</html>

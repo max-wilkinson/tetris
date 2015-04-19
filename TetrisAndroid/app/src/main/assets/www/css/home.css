@@ -1,0 +1,86 @@
+html, body {
+	background-color: #404040;
+	text-align: center;
+	padding: 0px;
+	margin: 0px;
+}
+
+h1, h2, h3, h4, table {
+	color: white;
+	font-weight: lighter;
+}
+
+header h1 {
+	font-family: Syncopate;
+	font-size: 4em;
+}
+
+button.input_btn {
+	background: none;
+	border: none;
+}
+
+.my-nav {
+	background-color: gray;
+	border: none;
+	border-radius: 0px;
+	height: 12vh;
+	min-height: 100px;
+	margin-bottom: 5vh;
+}
+
+.text-input {
+	width: 30%;
+	min-width: 150px;
+	margin: 1em auto;
+}
+
+#guest-view, #signup-view, #login-view, #profile-view, #scores-view {
+	background-color: #7959b8;
+	width: 30%;
+	min-width: 400px;
+	margin: 3em auto;
+	padding: 0.5em;
+	box-shadow: 2px 2px 4px #181818;
+	display: none;
+}
+
+#input-method-view .input-method {
+	display: inline-block;
+	margin: 20px;
+}
+
+#guest-view {
+	background-color: #82CA9D;
+}
+
+#login-view {
+	background-color: #F94A32;
+}
+
+#profile-view {
+	background-color: #168BC5;
+}
+
+#scores-view {
+	background-color: #168BC5;
+}
+
+#scores-view table {
+	margin: auto;
+	width: 60%;
+	text-align: left;
+	font-size: 18px;
+}
+
+#scores-view tr {
+	max-width: 50%;
+}
+
+#start-btn, #logout-btn {
+	display: none;
+}
+
+#profile-pic {
+	border-radius: 20em;
+}

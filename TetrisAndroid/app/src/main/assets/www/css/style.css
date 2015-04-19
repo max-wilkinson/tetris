@@ -1,0 +1,73 @@
+body {
+	height: 100%;
+}
+
+#gameboard {
+	background-color: black;
+	width: 75%;
+}
+
+canvas {
+	background-color: black;
+}
+
+#sidebar {
+	background-color: LightGray;
+	padding: 0px;
+	text-align: center;
+}
+
+#gameboard, #sidebar {
+	height: 100vh;
+}
+
+#header {
+	background-color: gray;
+	width: 100%;
+	height: 10%;
+	min-height: 5em;
+	margin-top: -20px;
+	margin-bottom: 5vh;
+	box-shadow: 0px 1px 2px #888888;
+}
+
+#header h2 {
+	line-height: 3em;
+	color: white;
+	font-family: 'Syncopate';
+}
+
+#next {
+	width: 60%;
+	height: 25%;
+	margin: auto auto 5vh;
+	background: gray url("") no-repeat center;
+	background-size: cover;
+}
+
+#guest-mode, #footer {
+	display: none;
+}
+
+#guest-mode {
+	margin: 20px 0;
+}
+
+#menu-btn {
+	margin-top: 5vh;
+}
+
+#footer {
+	margin-top: 100px;
+}
+
+#popup {
+	display: none;
+	height: 50%;
+	width: 50%;
+	position: absolute;
+	left: 12%;
+	top: 10vh;
+	background-color: LightGray;
+	text-align: center;
+}

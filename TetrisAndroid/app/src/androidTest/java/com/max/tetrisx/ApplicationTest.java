@@ -1,4 +1,4 @@
-package com.example.max.jamshout;
+package com.max.tetrisx;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
