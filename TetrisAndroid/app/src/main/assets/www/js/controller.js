@@ -111,7 +111,7 @@ var frameDisplay = document.getElementById('frameID');
 //Touch gestures
 //$('canvas').on("swipeleft", swipeHandler);
 //$('canvas').on("swiperight", swipeHandler);
-$('canvas').on("tap", swipeHandler);
+//$('canvas').on("tap", swipeHandler);
 //$('canvas').on("swipedown", swipeHandler);
 
 function swipeHandler( event ){
