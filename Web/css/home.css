@@ -26,6 +26,7 @@ button.input_btn {
 	border-radius: 0px;
 	height: 12vh;
 	min-height: 100px;
+	max-height: 110px;
 	margin-bottom: 5vh;
 }
 
@@ -79,6 +80,8 @@ button.input_btn {
 
 #start-btn, #logout-btn {
 	display: none;
+	margin-bottom: 2em;
+	margin-top: 1em;
 }
 
 #profile-pic {
