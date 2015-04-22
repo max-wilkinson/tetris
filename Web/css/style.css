@@ -58,7 +58,7 @@ canvas {
 }
 
 #footer {
-	margin-top: 100px;
+	margin-top: 25px;
 }
 
 #popup {
@@ -70,4 +70,8 @@ canvas {
 	top: 10vh;
 	background-color: LightGray;
 	text-align: center;
+}
+
+#popup a {
+	margin-top: 10%;
 }

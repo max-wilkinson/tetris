@@ -74,6 +74,8 @@ function init() {
 function tick() {
     if ( valid( 0, 1, 0 ) ) {
         ++currentY;
+        var cur_score = $('#score_value').text();
+        $('#lines').text(cur_score);
     }
     // if the element settled
     else {
@@ -257,7 +259,7 @@ function restartGame(){
 function endGame() {
     var cur_score_elm = document.getElementById('score_value');
     var cur_score = parseInt(cur_score_elm.innerHTML);
-    $('#lines').text(cur_score);
+    //$('#lines').text(cur_score);
 
     updateHighScore(cur_score);
     //return updateHighScore(cur_score);    

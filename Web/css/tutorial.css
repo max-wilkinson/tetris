@@ -1,0 +1,28 @@
+header a {
+	position: absolute;
+	top: 25%;
+	right: 50px;
+}
+
+.control-container {
+	margin-bottom: 5%;
+}
+
+.controller {
+	height: 15em;
+	width: auto;
+	position: relative;
+	left: -10%;
+}
+
+#png {
+	height: 4.5em;
+	width: auto;
+	margin-left: 3em;
+}
+
+#alt-svg {
+	height: 4.5em;
+	width: auto;
+	margin-left: 5em;
+}
